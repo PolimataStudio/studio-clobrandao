@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Studio Clô Brandão | Cabelo, Make e Pele Madura em Salvador</title>
+    <meta name="description" content="Beleza com técnica, cuidado e confiança. +30 anos de experiência em cabelos, maquiagem e cuidados com pele madura. Agende seu horário.">
+    
+    <style>
+        :root {
+            --gold: #c5a059;
+            --black: #121212;
+            --dark-gray: #2a2a2a;
+            --light: #fdfbf7;
+            --text: #333;
+            --font-serif: 'Playfair Display', 'Georgia', serif;
+            --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: var(--font-sans);
+            color: var(--text);
+            background-color: var(--light);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4 { font-family: var(--font-serif); color: var(--black); font-weight: 400; }
+        
+        a { text-decoration: none; color: inherit; }
+        img { max-width: 100%; height: auto; display: block; }
+
+        /* Header */
+        .header {
+            position: fixed; top: 0; left: 0; width: 100%;
+            background-color: rgba(253, 251, 247, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            padding: 1rem 5%;
+            display: flex; justify-content: space-between; align-items: center;
+        }
+
+        .logo { font-family: var(--font-serif); font-size: 1.5rem; font-weight: 600; color: var(--black); display: flex; align-items: center; gap: 10px; }
+        .logo span { color: var(--gold); }
+
+        .nav-links { display: flex; gap: 2rem; align-items: center; }
+        .nav-links a { font-size: 0.95rem; font-weight: 500; text-transform: uppercase; letter-spacing: 1px; transition: color 0.3s; }
+        .nav-links a:hover { color: var(--gold); }
+        
+        .btn-header {
+            background-color: var(--gold); color: var(--light);
+            padding: 0.6rem 1.5rem; border-radius: 30px;
+            font-weight: 600; text-transform: uppercase; font-size: 0.85rem;
+            transition: background 0.3s;
+        }
+        .btn-header:hover { background-color: var(--black); color: var(--light); }
+
+        .mobile-menu-btn { display: none; background: none; border: none; font-size: 1.5rem; cursor: pointer; color: var(--black); }
+
+        /* ============================================================
+           POLÍMATA STUDIO — MALHA VISUAL INSTITUCIONAL (WATERMARK)
+           Camada fixa dupla: grafite (fundo claro) + prata (fundo escuro)
+           SVG vetorial embutido em data URI, repetição contínua.
+           ============================================================ */
+        .watermark {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            user-select: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            background-repeat: repeat;
+            background-position: center top;
+            background-size: 440px 440px;
+            z-index: 2;
+            will-change: opacity;
+        }
+
+        .watermark--dark {
+            background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='440'%20height='440'%20viewBox='0%200%20440%20440'%3E%3Cg%20transform='rotate(-22%20220%20220)'%3E%3Cpath%20d='M0%200L0%20100L24%20100L24%2070L60%2070L94%2035L60%200ZM24%2024L56%2024L74%2035L56%2046L24%2046Z'%20fill='%233a3a3a'%20fill-rule='evenodd'%20transform='translate(168%20152)'/%3E%3Ctext%20x='220'%20y='312'%20text-anchor='middle'%20font-family='Georgia,serif'%20font-size='18'%20letter-spacing='9'%20fill='%233a3a3a'%3EPOL%C3%8DMATA%3C/text%3E%3Ctext%20x='220'%20y='336'%20text-anchor='middle'%20font-family='Georgia,serif'%20font-size='10'%20letter-spacing='12'%20fill='%233a3a3a'%3ESTUDIO%3C/text%3E%3Ccircle%20cx='145'%20cy='290'%20r='2.2'%20fill='%233a3a3a'/%3E%3Ccircle%20cx='295'%20cy='290'%20r='2.2'%20fill='%233a3a3a'/%3E%3C/g%3E%3C/svg%3E");
+            opacity: 0.07;
+        }
+
+        .watermark--light {
+            background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='440'%20height='440'%20viewBox='0%200%20440%20440'%3E%3Cg%20transform='rotate(-22%20220%20220)'%3E%3Cpath%20d='M0%200L0%20100L24%20100L24%2070L60%2070L94%2035L60%200ZM24%2024L56%2024L74%2035L56%2046L24%2046Z'%20fill='%23d4cfc1'%20fill-rule='evenodd'%20transform='translate(168%20152)'/%3E%3Ctext%20x='220'%20y='312'%20text-anchor='middle'%20font-family='Georgia,serif'%20font-size='18'%20letter-spacing='9'%20fill='%23d4cfc1'%3EPOL%C3%8DMATA%3C/text%3E%3Ctext%20x='220'%20y='336'%20text-anchor='middle'%20font-family='Georgia,serif'%20font-size='10'%20letter-spacing='12'%20fill='%23d4cfc1'%3ESTUDIO%3C/text%3E%3Ccircle%20cx='145'%20cy='290'%20r='2.2'%20fill='%23d4cfc1'/%3E%3Ccircle%20cx='295'%20cy='290'%20r='2.2'%20fill='%23d4cfc1'/%3E%3C/g%3E%3C/svg%3E");
+            opacity: 0.07;
+        }
+
+        @media (max-width: 900px) {
+            .watermark { background-size: 380px 380px; }
+        }
+        @media (max-width: 480px) {
+            .watermark { background-size: 320px 320px; }
+            .watermark--dark, .watermark--light { opacity: 0.065; }
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh; min-height: 600px;
+            display: grid; grid-template-columns: 1fr 1fr;
+            background-color: var(--black); margin-top: 0;
+        }
+
+        .hero-content {
+            display: flex; flex-direction: column; justify-content: center;
+            padding: 5% 10%; color: var(--light);
+        }
+
+        .hero-content h1 { font-size: 3.5rem; color: var(--light); line-height: 1.1; margin-bottom: 1.5rem; }
+        .hero-content h1 span { color: var(--gold); font-style: italic; }
+        .hero-content p { font-size: 1.2rem; color: #ccc; margin-bottom: 2rem; max-width: 80%; }
+
+        .btn-primary {
+            display: inline-block; background-color: var(--gold); color: var(--light);
+            padding: 1rem 2.5rem; border-radius: 30px; font-size: 1rem; font-weight: 600;
+            text-transform: uppercase; letter-spacing: 1px; align-self: flex-start;
+            transition: transform 0.3s, background 0.3s; border: none; cursor: pointer;
+        }
+        .btn-primary:hover { background-color: #b08d4a; transform: translateY(-3px); }
+
+        .hero-image { background: url('assets/images/hero-clo.jpg') center/cover no-repeat; height: 100%; }
+
+        /* Sobre */
+        .sobre { padding: 6rem 10%; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; background-color: var(--light); }
+        .sobre-image img { border-radius: 10px; box-shadow: 20px 20px 0 var(--gold); }
+        .sobre-text h2 { font-size: 2.5rem; margin-bottom: 1.5rem; }
+        .sobre-text p { margin-bottom: 1rem; font-size: 1.1rem; color: #555; }
+        .sobre-text .highlight { font-weight: 600; color: var(--black); }
+
+        /* Serviços */
+        .servicos { padding: 6rem 10%; background-color: #f4f1ea; text-align: center; }
+        .servicos h2 { font-size: 2.5rem; margin-bottom: 3rem; }
+        .grid-servicos { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; }
+        
+        .card-servico {
+            background: var(--light); padding: 3rem 2rem; border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05); transition: transform 0.3s;
+            border-top: 3px solid var(--gold);
+        }
+        .card-servico:hover { transform: translateY(-10px); }
+        .card-servico h3 { font-size: 1.5rem; margin-bottom: 1rem; }
+        .card-servico p { font-size: 0.95rem; color: #666; }
+
+        /* Portfólio */
+        .portfolio { padding: 6rem 10%; text-align: center; }
+        .portfolio h2 { font-size: 2.5rem; margin-bottom: 3rem; }
+        .grid-portfolio { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+        .portfolio-item { position: relative; overflow: hidden; border-radius: 10px; aspect-ratio: 1/1; }
+        .portfolio-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; }
+        .portfolio-item:hover img { transform: scale(1.05); }
+
+        /* Contato e Agendamento */
+        .contato { padding: 6rem 10%; background-color: var(--black); color: var(--light); display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; }
+        .contato-info h2 { color: var(--light); font-size: 2.5rem; margin-bottom: 1.5rem; }
+        .contato-info p { color: #bbb; margin-bottom: 2rem; }
+        .contato-info ul { list-style: none; margin-bottom: 2rem; }
+        .contato-info ul li { margin-bottom: 1rem; display: flex; align-items: center; gap: 10px; font-size: 1.1rem; }
+        .contato-info ul li span { color: var(--gold); font-weight: bold; }
+
+        .form-group { margin-bottom: 1.5rem; }
+        .form-group label { display: block; margin-bottom: 0.5rem; font-size: 0.9rem; color: #ccc; }
+        .form-group input, .form-group select {
+            width: 100%; padding: 1rem; border: 1px solid #444; border-radius: 5px;
+            background-color: #222; color: var(--light); font-family: var(--font-sans);
+            outline: none; transition: border-color 0.3s;
+        }
+        .form-group input:focus, .form-group select:focus { border-color: var(--gold); }
+
+        /* Footer */
+        .footer { background-color: #0a0a0a; color: #888; text-align: center; padding: 3rem 5% 1rem; }
+        .footer iframe { width: 100%; height: 300px; border: 0; border-radius: 10px; margin-bottom: 2rem; filter: grayscale(100%) invert(90%) contrast(90%); }
+        .footer p { font-size: 0.9rem; margin-bottom: 0.5rem; }
+        .footer .credits { font-size: 0.8rem; margin-top: 1rem; color: #555; }
+        .footer .credits a { color: var(--gold); }
+
+        /* Responsividade */
+        @media (max-width: 900px) {
+            .hero { grid-template-columns: 1fr; height: auto; min-height: 100vh; }
+            .hero-image { height: 50vh; order: -1; }
+            .hero-content { padding: 3rem 5%; }
+            .hero-content h1 { font-size: 2.5rem; }
+            .hero-content p { max-width: 100%; }
+            .sobre { grid-template-columns: 1fr; padding: 4rem 5%; }
+            .sobre-image img { box-shadow: 10px 10px 0 var(--gold); }
+            .contato { grid-template-columns: 1fr; padding: 4rem 5%; }
+            .grid-portfolio { grid-template-columns: 1fr; }
+            .nav-links { display: none; flex-direction: column; position: absolute; top: 100%; left: 0; width: 100%; background: var(--light); padding: 2rem; box-shadow: 0 5px 10px rgba(0,0,0,0.1); }
+            .nav-links.active { display: flex; }
+            .mobile-menu-btn { display: block; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- POLÍMATA STUDIO — Malha visual institucional (decorativa, não interativa) -->
+    <div class="watermark watermark--dark" aria-hidden="true"></div>
+    <div class="watermark watermark--light" aria-hidden="true"></div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="logo">
+            <span>Studio</span> Clô Brandão
+        </div>
+        <button class="mobile-menu-btn" onclick="toggleMenu()">☰</button>
+        <nav class="nav-links" id="navLinks">
+            <a href="#sobre">Sobre</a>
+            <a href="#servicos">Serviços</a>
+            <a href="#portfolio">Portfólio</a>
+            <a href="#agendamento" class="btn-header">Agendar</a>
+        </nav>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>Beleza com <span>técnica</span>, cuidado e confiança.</h1>
+            <p>Mais de 30 anos de experiência dedicados a realçar a sua beleza. Especialista em cabelos, maquiagem e pele madura em Salvador.</p>
+            <a href="#agendamento" class="btn-primary">Agende seu horário</a>
+        </div>
+        <div class="hero-image" role="img" aria-label="Clô Brandão sorrindo elegantemente"></div>
+    </section>
+
+    <!-- Sobre -->
+    <section class="sobre" id="sobre">
+        <div class="sobre-image">
+            <img src="assets/images/sobre-clo.jpg" alt="Clô Brandão em seu studio">
+        </div>
+        <div class="sobre-text">
+            <h2>Mais de 30 anos cuidando de histórias.</h2>
+            <p>O <span class="highlight">Studio Clô Brandão</span> nasceu do desejo de oferecer um atendimento exclusivo, onde a técnica apurada encontra o acolhimento que você merece.</p>
+            <p>Com formação sólida e décadas de prática, Clô Brandão se especializou em <span class="highlight">pele madura</span>, entendendo as necessidades únicas de quem busca não apenas um novo visual, mas autoestima e bem-estar.</p>
+            <p>Nosso atendimento é exclusivo e realizado apenas com agendamento prévio, garantindo a atenção e o tempo que você precisa.</p>
+        </div>
+    </section>
+
+    <!-- Serviços -->
+    <section class="servicos" id="servicos">
+        <h2>Nossos Serviços</h2>
+        <div class="grid-servicos">
+            <div class="card-servico">
+                <h3>Cabelos</h3>
+                <p>Cortes personalizados, coloração, escovas e tratamentos capilares que respeitam a estrutura e a história dos seus fios.</p>
+            </div>
+            <div class="card-servico">
+                <h3>Maquiagem</h3>
+                <p>Make social, noivas e automaquiagem. Técnicas que iluminam, valorizam e duram, com foco em realçar a sua beleza natural.</p>
+            </div>
+            <div class="card-servico">
+                <h3>Pele Madura</h3>
+                <p>Cuidados especiais para a pele madura. Limpeza de pele, hidratação profunda e maquiagem com produtos adequados para cada fase da vida.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfólio -->
+    <section class="portfolio" id="portfolio">
+        <h2>Nossos Trabalhos</h2>
+        <div class="grid-portfolio">
+            <div class="portfolio-item"><img src="assets/images/portfolio-1.jpg" alt="Trabalho de cabelo - escova e coloração"></div>
+            <div class="portfolio-item"><img src="assets/images/portfolio-2.jpg" alt="Maquiagem social - close no rosto"></div>
+            <div class="portfolio-item"><img src="assets/images/portfolio-3.jpg" alt="Transformação capilar - antes e depois"></div>
+            <div class="portfolio-item"><img src="assets/images/portfolio-4.jpg" alt="Cuidado com a pele - maquiagem e skincare"></div>
+        </div>
+    </section>
+
+    <!-- Contato / Agendamento -->
+    <section class="contato" id="agendamento">
+        <div class="contato-info">
+            <h2>Vamos conversar?</h2>
+            <p>Preencha o formulário ao lado para preparar sua mensagem. O atendimento é feito exclusivamente via WhatsApp para garantir a melhor experiência.</p>
+            <ul>
+                <li>
+                    <span>📍</span> R. da Aurora, 30 - Jardim Placaford, Salvador - BA, 41635-380
+                </li>
+                <li style="flex-direction: column; align-items: flex-start; gap: 0.3rem;">
+                    <div style="display: flex; align-items: center; gap: 10px;">
+                        <span>📞</span> 
+                        <a href="tel:+5571999352807" style="color: inherit; transition: color 0.3s;" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='inherit'">
+                            (71) 99935-2807
+                        </a>
+                    </div>
+                    <a href="https://api.whatsapp.com/send/?phone=557199352807&text&type=phone_number&app_absent=0&utm_source=ig" target="_blank" rel="noopener noreferrer" style="margin-left: 28px; font-size: 0.9rem; color: var(--gold); text-decoration: underline; transition: opacity 0.3s;" onmouseover="this.style.opacity='0.7'" onmouseout="this.style.opacity='1'">
+                        Iniciar conversa no WhatsApp
+                    </a>
+                </li>
+                <li>
+                    <span>📸</span> @studio.clobrandao_
+                </li>
+            </ul>
+        </div>
+        <div>
+            <form id="whatsappForm">
+                <div class="form-group">
+                    <label for="nome">Seu Nome *</label>
+                    <input type="text" id="nome" required placeholder="Digite seu nome completo">
+                </div>
+                <div class="form-group">
+                    <label for="servico">Serviço Desejado *</label>
+                    <select id="servico" required>
+                        <option value="">Selecione...</option>
+                        <option value="Cabelo">Cabelo</option>
+                        <option value="Maquiagem">Maquiagem</option>
+                        <option value="Pele Madura (Skincare)">Pele Madura (Skincare)</option>
+                        <option value="Outro">Outro</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="mensagem">Mensagem Adicional</label>
+                    <input type="text" id="mensagem" placeholder="Ex: Gostaria de um horário na sexta-feira...">
+                </div>
+                <button type="submit" class="btn-primary">Enviar via WhatsApp</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="map-container">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1944.1704411072217!2d-38.37005568422638!3d-12.950025713261772!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x7161762a85de5af%3A0xf2bb8ca9e4b530f3!2sR.%20da%20Aurora%2C%2030%20-%20Jardim%20Placaford%2C%20Salvador%20-%20BA%2C%2041635-380!5e0!3m2!1spt-BR!2sbr!4v1793717596515!5m2!1spt-BR!2sbr" allowfullscreen="" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+        </div>
+        <p>Studio Clô Brandão &copy; 2024 - Todos os direitos reservados.</p>
+        <p>Desenvolvido com inteligência e estratégia por <a href="https://polimatastudio.netlify.app/" target="_blank">Polímata Studio</a>.</p>
+        <div class="credits">Demonstração conceitual. Imagens e identidade visual ilustrativas.</div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // Menu Mobile Toggle
+        function toggleMenu() {
+            const nav = document.getElementById('navLinks');
+            nav.classList.toggle('active');
+        }
+
+        // Fechar menu ao clicar em um link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                document.getElementById('navLinks').classList.remove('active');
+            });
+        });
+
+        // Formulário WhatsApp
+        document.getElementById('whatsappForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const nome = document.getElementById('nome').value;
+            const servico = document.getElementById('servico').value;
+            const mensagem = document.getElementById('mensagem').value;
+            
+            const telefone = '5571999352807';
+            let texto = `Olá, Clô! Meu nome é ${nome}. Gostaria de agendar um serviço de *${servico}*.`;
+            
+            if (mensagem) {
+                texto += `\n\nMensagem: ${mensagem}`;
+            }
+            
+            const url = `https://wa.me/${telefone}?text=${encodeURIComponent(texto)}`;
+            window.open(url, '_blank');
+        });
+    </script>
+</body>
+</html>
